@@ -1,4 +1,4 @@
-EnableDNS
+enableDNS
 =========
 
-EnableDNS core
+enableDNS core
