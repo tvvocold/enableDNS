@@ -38,6 +38,6 @@ def basic_auth(func):
 
         response = HttpResponse("Unauthorized")
         response.status_code = 401
-        response['WWW-Authenticate'] = 'Basic realm="EnableDNS"'
+        response['WWW-Authenticate'] = 'Basic realm="enableDNS"'
         return response
     return wrapper

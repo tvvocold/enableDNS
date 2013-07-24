@@ -94,7 +94,7 @@ class DomainsView(APIView):
 
     ## Add a new zone
 
-    When adding a new domain using the EnableDNS web page, you are required to
+    When adding a new domain using the enableDNS web page, you are required to
     specify only the domain name. A DNS zone is created automatically from a
     predefined template. With the API you have the freedom to choose which
     records get created. For example, you may wish to only have
