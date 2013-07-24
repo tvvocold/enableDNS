@@ -76,10 +76,10 @@ Next, edit uwsgi.ini and change any setting you might need. Here are a few setti
 uid = 1000
 gid = 1000
 http = 127.0.0.1:8080
-virtualenv = /home/evps/workspace/EnableDNS/venv
-touch-reload= /home/evps/workspace/EnableDNS/edns/restart.txt
-chdir = /home/evps/workspace/EnableDNS/edns
-check-static = /home/evps/workspace/EnableDNS/edns/public
+virtualenv = /home/edns/workspace/EnableDNS/venv
+touch-reload= /home/edns/workspace/EnableDNS/edns/restart.txt
+chdir = /home/edns/workspace/EnableDNS/edns
+check-static = /home/edns/workspace/EnableDNS/edns/public
 ```
 
 At this point we should be good to go. You should be able to start EnableDNS using the following command:
