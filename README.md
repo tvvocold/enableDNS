@@ -1,9 +1,32 @@
-#enableDNS
+# enableDNS
 
 enableDNS is a DNS management solution written in Django and realeased under the GPLv2 license. Zones are written directly to a MySQL database (in theory you can use PostgreSQL as well), and read by bind9 through the DLZ (dinamically loadable zones) module.
 
 All interaction is done through a REST api. The core itself does not handle user registration in any way, but you can add users through the admin interface, which is enabled by default.
 
+
+## Supported DNS record types
+
+* A
+* AAAA
+* MX
+* NS
+* CNAME
+* TXT
+* SRV
+* PTR
+
+## Dynamic DNS update
+
+Due to popular demand I have added an API similar to that of DynDNS. Most routers and SANs have an option to update their IP with a dynamic DNS service. The URL you can use is:
+
+http://127.0.0.1:8080/nic/update/?myip=192.168.0.1&hostname=1
+
+The only difference is that you need to use the DNS entry ID instead of the hostname itself. That should not be a problem and shoud work on most dynamic DNS update applications.
+
+The myip parameter can be left out if you do not need to update to an IP other then the one you are accessing EnableDNS with. Basically the hostname will be updated to the IP shown by:
+
+http://127.0.0.1:8080/ip
 
 ## Installing the core
 
