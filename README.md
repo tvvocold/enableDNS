@@ -164,7 +164,7 @@ Add the following at the end:
 ```shell
 dlz "Mysql zone" {
    database "mysql
-   {host=127.0.0.1 dbname=bind user=bind pass=supersecretpassword}
+   {host=127.0.0.1 dbname=bind9 user=bind pass=supersecretpassword}
    {select zone from dns_records where zone = '$zone$'}
    {select ttl, type, priority, case when lower(type) = 'soa' then concat_ws(' ', data, resp_person, serial, refresh, retry, expire, minimum) else data end from dns_records where zone = '$zone$' and host = '$record$'}";
 };
@@ -175,7 +175,7 @@ Lets grant user bind select access to the database:
 
 ```shell
 mysql
-grant SELECT,USAGE on bind.* to 'bind'@'localhost' identified by 'supersecretpassword';
+grant SELECT,USAGE on bind9.* to 'bind'@'localhost' identified by 'supersecretpassword';
 flush privileges;
 ```
 
