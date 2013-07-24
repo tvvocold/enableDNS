@@ -482,7 +482,7 @@ class Zone(object):
                 ent.append(DnsRecords(**i))
             DnsRecords.objects.bulk_create(ent)
 
-            # Add zone to EnableDNS database
+            # Add zone to enableDNS database
             self.zone = dnsZones.objects.create(zone_name=zone_name, owner=self.account)
         return True
 

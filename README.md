@@ -1,15 +1,15 @@
-#EnableDNS
+#enableDNS
 
-EnableDNS is a DNS management solution written in Django and realeased under the GPLv2 license. Zones are written directly to a MySQL database (in theory you can use PostgreSQL as well), and read by bind9 through the DLZ (dinamically loadable zones) module.
+enableDNS is a DNS management solution written in Django and realeased under the GPLv2 license. Zones are written directly to a MySQL database (in theory you can use PostgreSQL as well), and read by bind9 through the DLZ (dinamically loadable zones) module.
 
 All interaction is done through a REST api. The core itself does not handle user registration in any way, but you can add users through the admin interface, which is enabled by default.
 
 
 ## Installing the core
 
-There are basically two parts to installing EnableDNS, and having a fully functional DNS solution. The first part is installing the core itself, and the second part is installing your nameservers and taking care of the MySQL (or PostgreSQL) replication to all the nameservers.
+There are basically two parts to installing enableDNS, and having a fully functional DNS solution. The first part is installing the core itself, and the second part is installing your nameservers and taking care of the MySQL (or PostgreSQL) replication to all the nameservers.
 
-The following instructions assume you are using Ubuntu 12.04 and that you have already created a user (let's say edns) which will run EnableDNS.
+The following instructions assume you are using Ubuntu 12.04 and that you have already created a user (let's say edns) which will run enableDNS.
 
 We'll start by installing the needed dependencies:
 
@@ -31,8 +31,8 @@ flush privileges;
 Now install the core:
 
 ```shell
-mkdir -p /home/edns/workspace/EnableDNS
-cd /home/edns/workspace/EnableDNS
+mkdir -p /home/edns/workspace/enableDNS
+cd /home/edns/workspace/enableDNS
 git clone git@github.com:ROHOST/enableDNS.git edns
 virtualenv venv
 . venv/bin/activate
@@ -61,7 +61,7 @@ DATABASES = {
 }
 ```
 
-Next we must sync our database. This part is a bit odd because EnableDNS needs 2 databases to work and django south does not obey the normal django database routers when it comes to syncing. Django has a nifty feature that allows you to write an allow_syncdb() method inside your database router and exclude some tables from one database or the other. But South is like the honey badger, [it does not give a s**t](https://www.youtube.com/watch?v=4r7wHMg5Yjg). So we have to sync the same tables for both databases.
+Next we must sync our database. This part is a bit odd because enableDNS needs 2 databases to work and django south does not obey the normal django database routers when it comes to syncing. Django has a nifty feature that allows you to write an allow_syncdb() method inside your database router and exclude some tables from one database or the other. But South is like the honey badger, [it does not give a s**t](https://www.youtube.com/watch?v=4r7wHMg5Yjg). So we have to sync the same tables for both databases.
 
 ```shell
 ./manage.py syncdb  # Go ahed and create an admin user here
@@ -76,13 +76,13 @@ Next, edit uwsgi.ini and change any setting you might need. Here are a few setti
 uid = 1000
 gid = 1000
 http = 127.0.0.1:8080
-virtualenv = /home/edns/workspace/EnableDNS/venv
-touch-reload= /home/edns/workspace/EnableDNS/edns/restart.txt
-chdir = /home/edns/workspace/EnableDNS/edns
-check-static = /home/edns/workspace/EnableDNS/edns/public
+virtualenv = /home/edns/workspace/enableDNS/venv
+touch-reload= /home/edns/workspace/enableDNS/edns/restart.txt
+chdir = /home/edns/workspace/enableDNS/edns
+check-static = /home/edns/workspace/enableDNS/edns/public
 ```
 
-At this point we should be good to go. You should be able to start EnableDNS using the following command:
+At this point we should be good to go. You should be able to start enableDNS using the following command:
 
 ```shell
 uwsgi --ini uwsgi.ini
