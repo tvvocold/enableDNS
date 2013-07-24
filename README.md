@@ -18,7 +18,7 @@ sudo apt-get install python-virtualenv python-pip mysql-server fakeroot
 sudo apt-get build-dep python-mysqldb python-ipaddr uwsgi
 ```
 
-Create the needed databases and grant privileges for our app:
+Create the needed databases and grant privileges for our app. We will be using these credentials in our settings.py to connect to the database. I sugest you se a stronger password then the one bellow:
 
 ```shell
 create database dnsAdmin;
@@ -40,7 +40,7 @@ cd edns
 pip install -r requirements.txt
 ```
 
-You now have the app and all its dependencies installed. You may want to change some settings in settings.py. At bare minimum you will probably want to change the database settings:
+You now have the app and all its dependencies installed. You may want to change some settings in settings.py. At bare minimum you will probably want to change the database settings. Make sure you use the same user/password/database you used earlier:
 
 ```python
 DATABASES = {
