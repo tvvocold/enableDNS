@@ -14,7 +14,7 @@ The following instructions assume you are using Ubuntu 12.04 and that you have a
 We'll start by installing the needed dependencies:
 
 ```shell
-sudo apt-get install python-virtualenv python-pip mysql-server
+sudo apt-get install python-virtualenv python-pip mysql-server fakeroot
 sudo apt-get build-dep python-mysqldb python-ipaddr uwsgi
 ```
 
