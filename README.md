@@ -40,7 +40,7 @@ cd edns
 pip install -r requirements.txt
 ```
 
-You now have the app and all its dependencies installed. Time to take care of the database settings:
+You now have the app and all its dependencies installed. You may want to change some settings in settings.py. At bare minimum you will probably want to change the database settings:
 
 ```python
 DATABASES = {
