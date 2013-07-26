@@ -4,6 +4,8 @@ enableDNS is a DNS management solution written in Django and realeased under the
 
 All interaction is done through a REST api. The core itself does not handle user registration in any way, but you can add users through the admin interface, which is enabled by default.
 
+Setting everything up by hand takes 30 min or less if you copy/paste fast enough :)
+
 
 ## Supported DNS record types
 
