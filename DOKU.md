@@ -109,7 +109,7 @@ For the sake of keeping this example as simple and clean as possible, i have onl
 ]
 ```
 
-Now, a quick note about the results returned by the API. All created records will have a field called 'id' and one called 'url' inside the record block. The 'url' and the 'id' can be used when updating or deleting a record. The rest of the fields are actual record fields and they are all required. For a list of record types and required fields, please refer to section [DNS Record Types](#)
+Now, a quick note about the results returned by the API. All created records will have a field called 'id' and one called 'url' inside the record block. The 'url' and the 'id' can be used when updating or deleting a record. The rest of the fields are actual record fields and they are all required. For a list of record types and required fields, please refer to section [DNS Record Types](/ROHOST/enableDNS/blob/master/RecordTypes.md)
 
 
 ## Create operations
