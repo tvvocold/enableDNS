@@ -411,6 +411,8 @@ class Zone(object):
 
     def generate_SOA(self):
         # nu uita sa adaugi si "zone" inainte de create/update
+        resp_person = getattr('DNS_RESP_PERSON', s, 'support.enabledns.com')
+        soa_data = getattr('DNS_SOA_DATA', s, 'ns.enabledns.com.')
         serial = str(date.today().strftime("%Y%m%d")) + "00"
         data = {
             'retry': 7200,
@@ -421,8 +423,8 @@ class Zone(object):
             'expire': 1209600,
             'ttl': 1,
             'serial': serial,
-            'data': 'ns.enabledns.com.',
-            'resp_person': 'support.enabledns.com.'
+            'data': soa_data,
+            'resp_person': resp_person,
         }
         return data
 
