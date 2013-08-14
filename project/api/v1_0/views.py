@@ -26,8 +26,6 @@ def process_err(func):
             return Response({"detail": str(err)}, status=400)
         except NotFound as err:
             return Response({"detail": str(err)}, status=404)
-        except NoZone as err:
-            return Response({"detail": str(err)}, status=404)
         except NotAllowed as err:
             return Response({"detail": str(err)}, status=401)
         except DuplicateEntry as err:
