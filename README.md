@@ -96,6 +96,12 @@ chdir = /home/edns/workspace/enableDNS/edns
 check-static = /home/edns/workspace/enableDNS/edns/public
 ```
 
+Run the collectstatic management command to pull the CSS and js files for rest_framework and admin interfaces.
+
+```shell
+./manage.py collectstatic
+```
+
 At this point we should be good to go. You should be able to start enableDNS using the following command:
 
 ```shell
