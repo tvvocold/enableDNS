@@ -6,14 +6,17 @@
 # Please edit the following
 
 ednsUSER="edns"         # enableDNS user
-ednsPASS="egpitevjeam7" # enableDNS password
+ednsPASS="" # enableDNS password
 BINDUSER="bind"         # Bind MySQL user
-BINDPASS="egpitevjeam7" # Bind MySQL password
+BINDPASS="" # Bind MySQL password
 DATABASE="dnsAdmin"     # dnsdatabase
 BINDDB="bind9"          # bind database
 WORKSPACE="/home/$ednsUSER/workspace/enableDNS"
 
 # Installation process starts here
+
+[ -z "$ednsPASS" ] && read -p "Please provide password for $ednsUSER: " ednsPASS
+[ -z "$BINDPASS" ] && read -p "Please provide password for $BINDUSER: " BINDPASS
 
 grep "deb-src" /etc/apt/sources.list > /dev/null 2>&1
 [ "$?" -ne 0 ] && echo "I need dep-src in /etc/apt/sources.list to continue... Please add them and press Enter" && read
@@ -29,7 +32,7 @@ sudo apt-get build-dep python-mysqldb python-ipaddr uwsgi -y
 [ $? -ne 0 ] && read -p  "Error installing packages. Do you want to continue? Y/n -  " answer
 [ "$answer" == 'n' ] && exit 1
 
-read -p  "Please provide MySQL root password in order to create databases and grant premissions: " SQLPASS
+read -p  "Please provide MySQL root password in order to create databases and grant permissions: " SQLPASS
 
 mysql -u root -p$SQLPASS <<EOF
 create database $DATABASE;
@@ -82,7 +85,7 @@ $WORKSPACE/edns/manage.py migrate
 $WORKSPACE/edns/manage.py syncdb --database=bind --noinput
 $WORKSPACE/edns/manage.py migrate --database=bind
 
-[ $? -ne 0 ] && read -p  "Errors while excetuting manage.py. Do you want to continue? Y/n -  " answer
+[ $? -ne 0 ] && read -p  "Errors while executing manage.py. Do you want to continue? Y/n -  " answer
 [ "$answer" == 'n' ] && exit 1
 
 ednsUID=$(id -u $ednsUSER)
@@ -109,7 +112,7 @@ Point your browser to: http://$IPADDR:8080 and you should be redirected to the A
 http://$IPADDR:8080/admin
 
 Each user will have a maximum of 5 domains he can create. You can edit user profiles and add more if you wish. There is also a 1000 record limit. That can be tweaked as well.
-The API has 3 renderers enabled: api, json and YAML. The api renderer is a browser friendly, clickable interface that you can use to test the API inside the browser. The api allows 2 authentication mechanisms: session based and basic authentication (in the future maybe even OAuth). For testing purposes, you can login usging:
+The API has 3 renderer's enabled: api, json and YAML. The api renderer is a browser friendly interface that you can use to test the API inside the browser. The api allows 2 authentication mechanisms: session based and basic authentication (in the future maybe even OAuth). For testing purposes, you can login using:
 
 http://$IPADDR:8080/api/v1.0/api-auth/login/
 
@@ -142,7 +145,7 @@ dlz "Mysql zone" {
 };
 EOF
 
-read -p  "Please provide MySQL root password in order to create databases and grant premissions for bind: " SQLPASS
+read -p  "Please provide MySQL root password in order to create databases and grant permissions for bind: " SQLPASS
 
 mysql -u root -p$SQLPASS <<EOF
 grant SELECT,USAGE on $BINDDB.* to '$BINDUSER'@localhost identified by '$BINDPASS';
@@ -161,7 +164,7 @@ if [ $? -ne 0 ]; then
     echo "Errors detected. Please see above!"
     exit 1
 else
-    echo "Tests completed sucessfully."
+    echo "Tests completed successfully."
 fi
 
 if [ $UID -eq 0 ]
