@@ -115,6 +115,7 @@ EOF
     sed -i 's|^chdir = .*|chdir = '$WORKSPACE/edns'|' "$WORKSPACE/edns/uwsgi.ini"
     sed -i 's|^check-static = .*|check-static = '$WORKSPACE/edns/public'|' "$WORKSPACE/edns/uwsgi.ini"
 
+    $WORKSPACE/edns/manage.py collectstatic
     $WORKSPACE/venv/bin/uwsgi --ini $WORKSPACE/edns/uwsgi.ini &
 
 }
@@ -154,7 +155,7 @@ EOF
 grant SELECT,USAGE on $BINDDB.* to '$BINDUSER'@localhost identified by '$BINDPASS';
 flush privileges;
 EOF
-    /etc/init.d/bind9 start
+    /etc/init.d/bind9 restart
 
     [ $? -ne 0 ] && echo "Errors detected. I'll exit now!" && exit 1
 
@@ -180,6 +181,7 @@ initial_checks
 core_part
 bind_rebuild
 
+
 if [ $? -eq 0 ]; then
     echo "
     #######################################################################################################################################################
@@ -199,3 +201,4 @@ if [ $? -eq 0 ]; then
     #######################################################################################################################################################
     "
 fi
+
