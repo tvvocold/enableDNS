@@ -136,6 +136,7 @@ bind_rebuild()
     /.*--enable-threads.*/i\
     \t\t--with-dlz-mysql \\' debian/rules
     sed -i '/#ifdef DLZ/d;$d' contrib/dlz/drivers/sdlz_helper.c
+    sed -i '22i\\trecursive no\;' /etc/bind/named.conf.options
     dpkg-buildpackage -rfakeroot -b
 
     cd ..
