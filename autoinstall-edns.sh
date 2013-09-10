@@ -65,7 +65,7 @@ EOF
     mkdir -p $WORKSPACE
     cd $WORKSPACE
 
-    git clone git@github.com:ROHOST/enableDNS.git edns
+    git clone https://github.com/ROHOST/enableDNS.git edns
 
     [ $? -ne 0 ] && read -p  "Errors while git clone. Do you want to continue? Y/n -  " answer
     [ "$answer" == 'n' ] && exit 1
